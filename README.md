@@ -7,7 +7,9 @@ letras, esquemas de color adicionales y el plugin C++ ya modificado.
 El proyecto empezó a partir de
 [caelestia-dots/caelestia](https://github.com/caelestia-dots/caelestia) y de la
 base [dim-ghub/midnight-shell](https://github.com/dim-ghub/midnight-shell), pero
-el árbol actual incluye bastantes cambios propios. La licencia original
+el árbol actual incluye bastantes cambios propios. **Caelestia ES es una
+versión comunitaria derivada e independiente**, sin afiliación oficial con
+los proyectos originales. La licencia original
 GPL-3.0 se conserva en [`LICENSE`](LICENSE).
 
 ## Qué contiene
@@ -198,21 +200,26 @@ el instalador (`~/.local` por defecto).
 - **El reloj usa otra fuente**: instala la fuente o cambia
   `appearance.font.clock` en `~/.config/caelestia/shell.json`.
 
-## Subir a GitHub
+## Repositorio y ramas
 
-Esta carpeta ya es un repositorio Git independiente con un commit inicial en
-la rama `main`. Solo falta añadir tu remoto y subir:
+Esta versión se publica en el fork
+[SasoIkuyo/caelestia](https://github.com/SasoIkuyo/caelestia), en la rama
+`personal/caelestia-es`. La rama `main` conserva la base de los dotfiles
+originales; la rama personal incorpora esta instantánea de Caelestia ES,
+incluidos el shell derivado de MiDnight y el plugin.
+
+Para obtener esta versión:
 
 ```bash
-cd caelestia-es
-git remote add origin git@github.com:TU_USUARIO/TU_REPO.git
-git push -u origin main
+git clone --branch personal/caelestia-es https://github.com/SasoIkuyo/caelestia.git
+cd caelestia
 ```
 
-Si prefieres empezar el historial de cero, borra `.git` y ejecuta `git init`.
-Antes de subir, revisa `config/` y decide si quieres publicar la configuración
-de Hyprland completa. El shell, el plugin, los esquemas y el parche Python son
-autocontenidos.
+Revisa `config/` antes de instalar: contiene preferencias de Hyprland
+adaptadas al equipo de origen.
+
+Para proponer cambios a los proyectos originales mediante pull requests,
+consulta [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Créditos y upstream
 

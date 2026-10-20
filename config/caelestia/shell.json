@@ -1,0 +1,145 @@
+{
+    "ai": {
+        "defaultOllamaModel": "llama3"
+    },
+    "appearance": {
+        "font": {
+            "clock": "Spotify Mix UI Title"
+        },
+        "pitchBlack": false
+    },
+    "audio": {
+        "sounds": {
+            "sfxVolume": 1
+        }
+    },
+    "background": {
+        "desktopClock": {
+            "background": {
+                "enabled": true
+            },
+            "enabled": true,
+            "scale": 0.5
+        },
+        "desktopLyrics": {
+            "background": {
+                "enabled": false,
+                "opacity": 0.30466694078947365
+            },
+            "enabled": true,
+            "invertColors": true,
+            "overlay": true,
+            "scale": 1.0592105263157894
+        },
+        "videoWallpaperPaused": false,
+        "visualiser": {
+            "autoHide": false,
+            "blur": true,
+            "enabled": true,
+            "renderer": "cpu",
+            "rounding": 1.0302734375
+        },
+        "wallpaperEnabled": false
+    },
+    "bar": {
+        "scrollActions": {
+            "brightness": false
+        },
+        "statusIcons": [
+            {
+                "enabled": true,
+                "id": "lockStatus"
+            },
+            {
+                "enabled": false,
+                "id": "audio"
+            },
+            {
+                "enabled": false,
+                "id": "microphone"
+            },
+            {
+                "enabled": false,
+                "id": "kbLayout"
+            },
+            {
+                "enabled": true,
+                "id": "network"
+            },
+            {
+                "enabled": true,
+                "id": "bluetooth"
+            },
+            {
+                "enabled": false,
+                "id": "battery"
+            },
+            {
+                "enabled": false,
+                "id": "peripheralBattery"
+            },
+            {
+                "enabled": true,
+                "id": "notifications"
+            }
+        ]
+    },
+    "dashboard": {
+        "performance": {
+            "showBattery": false
+        },
+        "showClockSeconds": false,
+        "showHyprlandSplash": true,
+        "syncMediaShapesToBeat": true
+    },
+    "general": {
+        "apps": {
+            "terminal": [
+                "foot"
+            ]
+        }
+    },
+    "launcher": {
+        "favouriteApps": [
+            "com.spotify.Client",
+            "firefox",
+            "thunar",
+            "ai.storyteller.artcraft-launcher",
+            "appimagekit_789abe67aa7bc0059ca499d9b9bd5321-Dusklight"
+        ]
+    },
+    "lock": {
+        "profilePicShape": 12
+    },
+    "osd": {
+        "enableBrightness": false
+    },
+    "services": {
+        "arpcCaelestiaInfo": true,
+        "arpcEnabled": true,
+        "arpcSteamAutoDetect": true,
+        "bluetoothAutoReconnectDevices": [],
+        "clockFormat": "TwelveHour",
+        "dataUnits": "Decimal",
+        "lyricsBackend": "Auto",
+        "pipFollowFocus": true,
+        "pipPaused": false,
+        "quickShareAutoStart": true,
+        "visualiserBars": 74
+    },
+    "session": {
+        "commands": {
+            "logout": [
+                "hyprctl",
+                "dispatch",
+                "exit"
+            ]
+        }
+    },
+    "shimeji": {
+        "autoHide": true,
+        "count": 1,
+        "enabled": true,
+        "path": "~/.local/share/shimeji/survivor-slugcat/"
+    }
+}

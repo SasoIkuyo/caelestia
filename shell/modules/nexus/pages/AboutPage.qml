@@ -1,0 +1,191 @@
+import "../../../Esp.js" as Es
+import QtQuick
+import QtQuick.Layouts
+import Quickshell.Io
+import Caelestia
+import Caelestia.Config
+import Caelestia.I18n
+import qs.components
+import qs.services
+import qs.utils
+import qs.modules.nexus.common
+
+PageBase {
+    id: root
+
+    // Plugin support is not wired up yet; always 0 for now
+    readonly property int pluginCount: 0
+
+    property string quickshellVersion
+    property string cliVersion
+
+    title: Es.tr(Tr.tr("About"))
+
+    ColumnLayout {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        width: root.cappedWidth
+        spacing: Tokens.spacing.extraSmall / 2
+
+        // e.g. "Quickshell 0.3.0 (revision ...)"
+        Process {
+            running: true
+            command: ["quickshell", "--version"]
+            stdout: StdioCollector {
+                onStreamFinished: root.quickshellVersion = text.trim().split(" ")[1] ?? ""
+            }
+        }
+
+        // Parsed from the caelestia CLI's package listing; the sh wrapper avoids a
+        // warning when the (optional) CLI isn't installed
+        Process {
+            running: true
+            command: ["sh", "-c", "caelestia --version 2>/dev/null"]
+            stdout: StdioCollector {
+                onStreamFinished: {
+                    const m = text.match(/caelestia-cli\S*\s+(\d+(?:\.\d+)*)/);
+                    root.cliVersion = m ? m[1] : "";
+                }
+            }
+        }
+
+        // Hero
+        ConnectedRect {
+            Layout.fillWidth: true
+            first: true
+            last: true
+            implicitHeight: hero.implicitHeight + Tokens.padding.extraLarge * 2
+
+            ColumnLayout {
+                id: hero
+
+                anchors.centerIn: parent
+                width: parent.width - Tokens.padding.largeIncreased * 2
+                spacing: Tokens.spacing.small
+
+                property int clicks: 0
+
+                AnimatedLogo {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: implicitWidth
+                    Layout.preferredHeight: implicitHeight
+                }
+
+                StyledText {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: Tokens.spacing.small
+                    text: Es.tr("MiDnight")
+                    font: Tokens.font.headline.builders.large.width(110).build()
+                }
+
+                StyledText {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: Tokens.spacing.small
+                    text: Es.tr(qsTr("by DiM • Basically Caelestia+"))
+                    color: Colours.palette.m3onSurfaceVariant
+                    font: Tokens.font.label.medium
+                    opacity: 0.8
+                }
+
+                StyledText {
+                    Layout.alignment: Qt.AlignHCenter
+                    text: CUtils.version ? `v${CUtils.version}` : "…"
+                    color: Colours.palette.m3onSurfaceVariant
+                    font: Tokens.font.body.medium
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (GlobalConfig.general.developerMode) {
+                                Toaster.toast(Es.tr(qsTr("Developer Options")), Es.tr(qsTr("No need, you are already a developer.")), "construction");
+                                return;
+                            }
+
+                            hero.clicks++;
+                            const remaining = 7 - hero.clicks;
+                            if (remaining > 0 && remaining <= 4) {
+                                Toaster.toast(Es.tr(qsTr("Developer Options")), Es.tr(qsTr("You are now %1 steps away from being a developer.")).arg(remaining), "construction");
+                            } else if (remaining === 0) {
+                                root.nState.justUnlockedDevMode = true;
+                                GlobalConfig.general.developerMode = true;
+                                Toaster.toast(Es.tr(qsTr("Developer Options")), Es.tr(qsTr("You are now a developer!")), "construction");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // System
+        SectionHeader {
+            text: Es.tr(Tr.tr("System"))
+        }
+
+        InfoRow {
+            first: true
+            label: Es.tr(Tr.tr("Hostname"))
+            value: SysInfo.hostname
+        }
+
+        InfoRow {
+            label: Es.tr(Tr.trCtx("Device", "system model name"))
+            value: SysInfo.device
+        }
+
+        InfoRow {
+            label: Es.tr(Tr.tr("Distro"))
+            value: SysInfo.osPrettyName || SysInfo.osName
+        }
+
+        InfoRow {
+            label: Es.tr(Tr.tr("Kernel"))
+            value: SysInfo.kernel
+        }
+
+        InfoRow {
+            last: true
+            // TRANSLATORS: BIOS or UEFI firmware version
+            label: Es.tr(Tr.tr("Firmware"))
+            value: SysInfo.firmware
+        }
+
+        // Software
+        SectionHeader {
+            text: Es.tr(Tr.tr("Software"))
+        }
+
+        InfoRow {
+            first: true
+            label: Es.tr(Tr.trCtx("Shell", "the caelestia shell itself, not a unix shell"))
+            value: CUtils.version || "…"
+        }
+
+        InfoRow {
+            label: Es.tr(Tr.trCtx("CLI", "the caelestia command line tool"))
+            value: root.cliVersion || "…"
+        }
+
+        InfoRow {
+            label: Es.tr("Quickshell")
+            value: root.quickshellVersion || "…"
+        }
+
+        InfoRow {
+            last: true
+            label: Es.tr("Qt")
+            value: CUtils.qtVersion || "…"
+        }
+
+        // Plugins
+        SectionHeader {
+            text: Es.tr(Tr.tr("Plugins"))
+        }
+
+        InfoRow {
+            first: true
+            last: true
+            label: Es.tr(Tr.tr("Loaded plugins"))
+            value: root.pluginCount.toString()
+        }
+    }
+}

@@ -1,0 +1,85 @@
+import "../../../../Esp.js" as Es
+import QtQuick
+import QtQuick.Layouts
+import Caelestia.Config
+import qs.modules.nexus.common
+
+PageBase {
+    id: root
+
+    title: Es.tr(qsTr("Shimeji characters"))
+    isSubPage: true
+
+    ColumnLayout {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        width: root.cappedWidth
+        spacing: Tokens.spacing.extraSmall / 2
+
+        SectionHeader {
+            first: true
+            text: Es.tr(qsTr("General"))
+        }
+
+        ToggleRow {
+            first: true
+            Layout.fillWidth: true
+            text: Es.tr(qsTr("Enable Shimeji"))
+            configNode: root.targetConfig.shimeji
+            propertyName: "enabled"
+            checked: root.targetConfig.shimeji.enabled
+            onToggled: {
+                root.targetConfig.shimeji.enabled = checked;
+                root.targetConfig.save();
+            }
+        }
+
+        ToggleRow {
+            Layout.topMargin: Tokens.spacing.extraSmall / 2 - parent.spacing
+            Layout.fillWidth: true
+            text: Es.tr(qsTr("Auto-hide Shimeji"))
+            subtext: Es.tr(qsTr("Hide Shimeji when a window is open"))
+            configNode: root.targetConfig.shimeji
+            propertyName: "autoHide"
+            checked: root.targetConfig.shimeji.autoHide
+            onToggled: {
+                root.targetConfig.shimeji.autoHide = checked;
+                root.targetConfig.save();
+            }
+            enabled: root.targetConfig.shimeji.enabled
+        }
+
+        SliderRow {
+            Layout.topMargin: Tokens.spacing.extraSmall / 2 - parent.spacing
+            Layout.fillWidth: true
+            configNode: root.targetConfig.shimeji
+            propertyName: "scale"
+            label: Es.tr(qsTr("Size"))
+            value: (root.targetConfig.shimeji.scale - 0.5) / 1.5
+            valueLabel: Math.round(root.targetConfig.shimeji.scale * 100) + "%"
+            onMoved: v => {
+                root.targetConfig.shimeji.scale = 0.5 + v * 1.5;
+                root.targetConfig.save();
+            }
+            enabled: root.targetConfig.shimeji.enabled
+        }
+
+        StepperRow {
+            Layout.topMargin: Tokens.spacing.extraSmall / 2 - parent.spacing
+            last: true
+            Layout.fillWidth: true
+            label: Es.tr(qsTr("Shimeji count per screen"))
+            configNode: root.targetConfig.shimeji
+            propertyName: "count"
+            from: 1
+            to: 9999
+            stepSize: 1
+            value: root.targetConfig.shimeji.count
+            onMoved: v => {
+                root.targetConfig.shimeji.count = v;
+                root.targetConfig.save();
+            }
+            enabled: root.targetConfig.shimeji.enabled
+        }
+    }
+}

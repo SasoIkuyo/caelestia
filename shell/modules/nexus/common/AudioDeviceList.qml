@@ -8,6 +8,7 @@ import Quickshell.Services.Pipewire
 import Caelestia.Config
 import Caelestia.I18n
 import qs.components
+import qs.components.controls
 import qs.services
 import qs.modules.nexus.common
 
@@ -24,7 +25,7 @@ ItemList {
     showList: true
 
     model: ScriptModel {
-        values: [...root.nodes].sort((a, b) => (a.description || a.name || "").localeCompare(b.description || b.name || ""))
+        values: [...root.nodes].filter(node => Audio.showHiddenDevices || !Audio.isDeviceHidden(node)).sort((a, b) => (a.description || a.name || "").localeCompare(b.description || b.name || ""))
     }
 
     delegate: Item {
@@ -80,6 +81,12 @@ ItemList {
                 text: device.modelData?.description || device.modelData?.name || Es.tr(Tr.trCtx("Unknown", "unknown audio device"))
                 font: Tokens.font.body.small
                 elide: Text.ElideRight
+            }
+
+            IconTextButton {
+                text: Audio.isDeviceHidden(device.modelData) ? "Mostrar" : "Ocultar"
+                icon: Audio.isDeviceHidden(device.modelData) ? "visibility" : "visibility_off"
+                onClicked: Audio.toggleDeviceHidden(device.modelData)
             }
 
             MaterialIcon {

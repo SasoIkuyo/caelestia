@@ -21,12 +21,11 @@ ColumnLayout {
     implicitWidth: Math.max(300, _isSidebarOpen ? Tokens.sizes.sidebar.width - Tokens.padding.extraLargeIncreased : 0)
     spacing: Tokens.spacing.medium
 
-    ButtonGroup {
-        id: sinks
-    }
-
-    ButtonGroup {
-        id: sources
+    IconTextButton {
+        Layout.fillWidth: true
+        text: Audio.showHiddenDevices ? "Dejar de mostrar ocultos" : "Mostrar dispositivos ocultos"
+        icon: Audio.showHiddenDevices ? "visibility_off" : "visibility"
+        onClicked: Audio.showHiddenDevices = !Audio.showHiddenDevices
     }
 
     StyledText {
@@ -58,18 +57,23 @@ ColumnLayout {
             }
 
             Repeater {
-                model: Audio.sinks
+                model: Audio.sinks.filter(node => Audio.showHiddenDevices || !Audio.isDeviceHidden(node))
 
-                StyledRadioButton {
+                RowLayout {
                     id: outputControl
-
                     required property PwNode modelData
-
                     Layout.fillWidth: true
-                    ButtonGroup.group: sinks
-                    checked: Audio.sink?.id === modelData.id
-                    onClicked: Audio.setAudioSink(modelData)
-                    text: modelData.description
+                    StyledRadioButton {
+                        Layout.fillWidth: true
+                        checked: Audio.sink?.id === outputControl.modelData.id
+                        onClicked: Audio.setAudioSink(outputControl.modelData)
+                        text: outputControl.modelData.description
+                    }
+                    IconTextButton {
+                        text: Audio.isDeviceHidden(outputControl.modelData) ? "Mostrar" : "Ocultar"
+                        icon: Audio.isDeviceHidden(outputControl.modelData) ? "visibility" : "visibility_off"
+                        onClicked: Audio.toggleDeviceHidden(outputControl.modelData)
+                    }
                 }
             }
         }
@@ -97,18 +101,23 @@ ColumnLayout {
             }
 
             Repeater {
-                model: Audio.sources
+                model: Audio.sources.filter(node => Audio.showHiddenDevices || !Audio.isDeviceHidden(node))
 
-                StyledRadioButton {
+                RowLayout {
                     id: inputControl
-
                     required property PwNode modelData
-
                     Layout.fillWidth: true
-                    ButtonGroup.group: sources
-                    checked: Audio.source?.id === modelData.id
-                    onClicked: Audio.setAudioSource(modelData)
-                    text: modelData.description
+                    StyledRadioButton {
+                        Layout.fillWidth: true
+                        checked: Audio.source?.id === inputControl.modelData.id
+                        onClicked: Audio.setAudioSource(inputControl.modelData)
+                        text: inputControl.modelData.description
+                    }
+                    IconTextButton {
+                        text: Audio.isDeviceHidden(inputControl.modelData) ? "Mostrar" : "Ocultar"
+                        icon: Audio.isDeviceHidden(inputControl.modelData) ? "visibility" : "visibility_off"
+                        onClicked: Audio.toggleDeviceHidden(inputControl.modelData)
+                    }
                 }
             }
         }

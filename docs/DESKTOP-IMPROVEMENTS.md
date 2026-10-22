@@ -3,7 +3,7 @@
 ## Cambios
 
 - Audio: ocultar salidas y micrófonos, volver a mostrarlos y recordar la selección. Ocultar un dispositivo no lo silencia ni lo desconecta. El cambio de salida mediante atajo omite los dispositivos ocultos.
-- Idioma: Español aparece en el selector. Se incluye un catálogo nativo de 700 entradas traducidas y 40 pendientes; requiere compilar el plugin. El diccionario local sigue disponible para la interfaz existente.
+- Idioma: Español aparece en el selector. Se incluye un catálogo nativo de 740 entradas traducidas, sin entradas pendientes; requiere compilar el plugin. El diccionario local sigue disponible para la interfaz existente.
 - Clima: búsqueda de ciudades con región y país, guardado de coordenadas y regreso a ubicación automática por IP. La búsqueda usa Open-Meteo.
 - Rendimiento: visualizador decorativo a 30 FPS, sin textura adicional en el renderizador por CPU ni capa de pantalla completa cuando no se usa desenfoque. Los paneles multimedia ocultos dejan de solicitar análisis de audio.
 - Actualizaciones: vista previa de paquetes y versiones, iconos, registro en vivo, respuestas desde el panel y autenticación mediante el agente polkit de Quickshell. La página y el registro tienen desplazamiento independiente.

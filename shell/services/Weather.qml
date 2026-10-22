@@ -40,6 +40,25 @@ Singleton {
         return Units.formatTemp(value, unit, compact);
     }
 
+    function setLocation(latitude: real, longitude: real, label: string): void {
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)
+            || Math.abs(latitude) > 90 || Math.abs(longitude) > 180) return;
+        const coords = latitude + "," + longitude;
+        cacheCity(coords, label);
+        city = label;
+        GlobalConfig.services.weatherLocation = coords;
+        GlobalConfig.save();
+        reload();
+    }
+
+    function useAutomaticLocation(): void {
+        loc = "";
+        city = "";
+        GlobalConfig.services.weatherLocation = "";
+        GlobalConfig.save();
+        reload();
+    }
+
     function reload(): void {
         const configLocation = GlobalConfig.services.weatherLocation;
 
@@ -185,6 +204,7 @@ Singleton {
         };
 
         Requests.get(nominatimUrl, text => {
+            if (root.loc !== coords) return;
             let geo;
             try {
                 geo = JSON.parse(text).features?.[0]?.properties.geocoding;
@@ -206,6 +226,7 @@ Singleton {
             console.warn(lc, "No locality in nominatim response");
             city = Es.tr(Tr.trCtx("Unknown city", "weather location unavailable"));
         }, error => {
+            if (root.loc !== coords) return;
             console.warn(lc, `Nominatim request failed: ${error}`);
             city = Es.tr(Tr.trCtx("Unknown city", "weather location unavailable"));
         }, nominatimHeaders);
@@ -216,6 +237,7 @@ Singleton {
         const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=${lang}&format=json`;
 
         Requests.get(url, text => {
+            if (GlobalConfig.services.weatherLocation !== cityName) return;
             const json = JSON.parse(text);
             if (json.results && json.results.length > 0) {
                 const result = json.results[0];

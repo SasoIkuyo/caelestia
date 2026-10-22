@@ -8,7 +8,7 @@ return {
     -- Apps
     terminal                   = "foot",
     browser                    = "firefox",
-    editor                     = "codium",
+    editor                     = "code",
     fileExplorer               = "thunar",
     audioSettings              = "pwvucontrol",
 

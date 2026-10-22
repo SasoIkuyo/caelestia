@@ -34,7 +34,7 @@ Item {
     }
 
     Timer {
-        running: Players.active?.isPlaying ?? false
+        running: root.visible && (Players.active?.isPlaying ?? false)
         interval: GlobalConfig.dashboard.mediaUpdateInterval
         triggeredOnStart: true
         repeat: true
@@ -42,7 +42,7 @@ Item {
     }
 
     ServiceRef {
-        service: Audio.beatTracker
+        service: root.visible ? Audio.beatTracker : null
     }
 
     CircularProgress {

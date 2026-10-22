@@ -46,7 +46,7 @@ Item {
         id: wrapper
 
         anchors.fill: parent
-        layer.enabled: true
+        layer.enabled: root.opacity > 0 && Config.background.visualiser.blur
 
         Loader {
             asynchronous: true
@@ -150,11 +150,18 @@ Item {
                     fragmentShader: "qrc:/shaders/visualiser.frag.qsb"
                 }
 
-                FrameAnimation {
+                // Keep decorative animation at 30 fps even on high-refresh displays.
+                Timer {
+                    property double previousTick: 0
+                    interval: 33
+                    repeat: true
                     running: root.opacity > 0 && !bars.settled
+                    onRunningChanged: previousTick = Date.now()
                     onTriggered: {
-                        bars.advance(frameTime);
-                        if (!root.rendererGpu) {
+                        const now = Date.now();
+                        bars.advance(Math.min(0.1, (now - previousTick) / 1000));
+                        previousTick = now;
+                        if (root.rendererGpu) {
                             dataCanvas.requestPaint();
                         }
                     }

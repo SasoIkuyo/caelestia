@@ -1,25 +1,24 @@
-pragma Singleton
-
 import "../../Esp.js" as Es
-import QtQuick
-import QtQuick.Layouts
 import Caelestia.Config
 import Caelestia.I18n
+import QtQuick
+import QtQuick.Layouts
 import qs.components
-import qs.services
 import qs.modules.nexus.common
 import qs.modules.nexus.pages
 import qs.modules.nexus.pages.apps
 import qs.modules.nexus.pages.audio
+import qs.modules.nexus.pages.background
 import qs.modules.nexus.pages.bluetooth
+import qs.modules.nexus.pages.hyprland
 import qs.modules.nexus.pages.network
 import qs.modules.nexus.pages.panels
-import qs.modules.nexus.pages.services
-import qs.modules.nexus.pages.wallandstyle
 import qs.modules.nexus.pages.panels.taskbar
-import qs.modules.nexus.pages.background
+import qs.modules.nexus.pages.services
 import qs.modules.nexus.pages.tokens
-import qs.modules.nexus.pages.hyprland
+import qs.modules.nexus.pages.wallandstyle
+import qs.services
+pragma Singleton
 
 QtObject {
     id: root
@@ -30,262 +29,454 @@ QtObject {
             // Wallpaper & style
             StackPage {
                 Component {
-                    WallpaperAndStyle {}
+                    WallpaperAndStyle {
+                    }
+
                 }
+
                 Component {
-                    WallpaperSelect {}
+                    WallpaperSelect {
+                    }
+
                 }
+
                 Component {
-                    WallpaperCategory {}
+                    WallpaperCategory {
+                    }
+
                 }
+
                 Component {
-                    ColourSelect {}
+                    ColourSelect {
+                    }
+
                 }
+
                 Component {
-                    WallhavenPage {}
+                    WallhavenPage {
+                    }
+
                 }
+
                 Component {
-                    WallpaperEnginePage {}
+                    WallpaperEnginePage {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Background elements
             StackPage {
                 Component {
-                    BackgroundPage {}
+                    BackgroundPage {
+                    }
+
                 }
+
                 Component {
-                    DesktopClockPage {}
+                    DesktopClockPage {
+                    }
+
                 }
+
                 Component {
-                    DesktopLyricsPage {}
+                    DesktopLyricsPage {
+                    }
+
                 }
+
                 Component {
-                    VisualiserPage {}
+                    VisualiserPage {
+                    }
+
                 }
+
                 Component {
-                    ShimejiPage {}
+                    ShimejiPage {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Shell Tokens
             StackPage {
                 Component {
-                    TokensPage {}
-                }
-                Component {
-                    RoundingSpacingPage {}
-                }
-                Component {
-                    FontSizesPage {}
-                }
-                Component {
-                    BarDashboardPage {}
-                }
-                Component {
-                    WindowLockPage {}
-                }
-                Component {
-                    ShellElementsPage {}
-                }
-            }
-        },
+                    TokensPage {
+                    }
 
+                }
+
+                Component {
+                    RoundingSpacingPage {
+                    }
+
+                }
+
+                Component {
+                    FontSizesPage {
+                    }
+
+                }
+
+                Component {
+                    BarDashboardPage {
+                    }
+
+                }
+
+                Component {
+                    WindowLockPage {
+                    }
+
+                }
+
+                Component {
+                    ShellElementsPage {
+                    }
+
+                }
+
+            }
+
+        },
         // Connectivity
         Component {
             // Network
             StackPage {
                 Component {
-                    NetworkPage {}
+                    NetworkPage {
+                    }
+
                 }
+
                 Component {
-                    EthernetDetailPage {}
+                    EthernetDetailPage {
+                    }
+
                 }
+
                 Component {
-                    AddNetworkPage {}
+                    AddNetworkPage {
+                    }
+
                 }
+
                 Component {
-                    NetworkDetailPage {}
+                    NetworkDetailPage {
+                    }
+
                 }
+
                 Component {
-                    AddVpnPage {}
+                    AddVpnPage {
+                    }
+
                 }
+
                 Component {
-                    AllNetworksPage {}
+                    AllNetworksPage {
+                    }
+
                 }
+
                 Component {
-                    SavedNetworksPage {}
+                    SavedNetworksPage {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Bluetooth
             StackPage {
                 Component {
-                    BluetoothPage {}
+                    BluetoothPage {
+                    }
+
                 }
+
                 Component {
-                    BtDeviceInfo {}
+                    BtDeviceInfo {
+                    }
+
                 }
+
                 Component {
-                    BluetoothPairing {}
+                    BluetoothPairing {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Audio
             StackPage {
                 Component {
-                    AudioPage {}
-                }
-                Component {
-                    AppVolumes {}
-                }
-            }
-        },
+                    AudioPage {
+                    }
 
+                }
+
+                Component {
+                    AppVolumes {
+                    }
+
+                }
+
+            }
+
+        },
         // System
         Component {
-            PlaceholderComp {}
+            UpdatesPage {
+            }
+
         },
         Component {
-            PlaceholderComp {}
-        },
+            PlaceholderComp {
+            }
 
+        },
         // Shell
         Component {
             // Panels
             StackPage {
                 Component {
-                    PanelsPage {}
+                    PanelsPage {
+                    }
+
                 }
+
                 Component {
-                    DashboardPanel {}
+                    DashboardPanel {
+                    }
+
                 }
+
                 Component {
-                    TaskbarPanel {}
+                    TaskbarPanel {
+                    }
+
                 }
+
                 Component {
-                    LauncherPanel {}
+                    LauncherPanel {
+                    }
+
                 }
+
                 Component {
-                    SidebarPanel {}
+                    SidebarPanel {
+                    }
+
                 }
+
                 Component {
-                    UtilitiesPanel {}
+                    UtilitiesPanel {
+                    }
+
                 }
 
                 // Taskbar component sub-pages
                 Component {
-                    BarComponents {}
+                    BarComponents {
+                    }
+
                 }
+
                 Component {
-                    BarWorkspaces {}
+                    BarWorkspaces {
+                    }
+
                 }
+
                 Component {
-                    BarActiveWindow {}
+                    BarActiveWindow {
+                    }
+
                 }
+
                 Component {
-                    BarTray {}
+                    BarTray {
+                    }
+
                 }
+
                 Component {
-                    BarStatusIcons {}
+                    BarStatusIcons {
+                    }
+
                 }
+
                 Component {
-                    BarClock {}
+                    BarClock {
+                    }
+
                 }
+
                 Component {
-                    BarDock {}
+                    BarDock {
+                    }
+
                 }
+
                 Component {
-                    BarGithub {}
+                    BarGithub {
+                    }
+
                 }
+
                 Component {
-                    BarSpotify {}
+                    BarSpotify {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Apps
             StackPage {
                 Component {
-                    AppsPage {}
+                    AppsPage {
+                    }
+
                 }
+
                 Component {
-                    AllApps {}
+                    AllApps {
+                    }
+
                 }
+
                 Component {
-                    AppInfo {}
+                    AppInfo {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Hyprland
             StackPage {
                 Component {
-                    HyprlandPage {}
+                    HyprlandPage {
+                    }
+
                 }
+
                 Component {
-                    HyprVariablesPage {}
+                    HyprVariablesPage {
+                    }
+
                 }
+
                 Component {
-                    HyprKeybindsPage {}
+                    HyprKeybindsPage {
+                    }
+
                 }
+
                 Component {
-                    UserConfigPage {}
+                    UserConfigPage {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Services
             StackPage {
                 Component {
-                    ServicesPage {}
+                    ServicesPage {
+                    }
+
                 }
+
                 Component {
-                    NotificationsPage {}
+                    NotificationsPage {
+                    }
+
                 }
+
                 Component {
-                    GameModePage {}
+                    GameModePage {
+                    }
+
                 }
+
                 Component {
-                    GameModeTargetsPage {}
+                    GameModeTargetsPage {
+                    }
+
                 }
+
                 Component {
-                    ArpcPage {}
+                    ArpcPage {
+                    }
+
                 }
+
                 Component {
-                    PipPage {}
+                    PipPage {
+                    }
+
                 }
+
                 Component {
-                    QuickSharePage {}
+                    QuickSharePage {
+                    }
+
                 }
+
             }
+
         },
         Component {
             // Language & region
             StackPage {
                 Component {
-                    LanguageAndRegion {}
+                    LanguageAndRegion {
+                    }
+
                 }
+
             }
+
         },
-
-
         // About
         Component {
             StackPage {
                 Component {
-                    AboutPage {}
+                    AboutPage {
+                    }
+
                 }
+
             }
+
         }
     ]
+    readonly property Component
+    placeholderComp: Component {
+        PlaceholderComp {
+        }
 
-    readonly property Component placeholderComp: Component {
-        PlaceholderComp {}
     }
 
     component PlaceholderComp: Item {
@@ -315,6 +506,9 @@ QtObject {
                 color: Colours.palette.m3outlineVariant
                 font: Tokens.font.body.large
             }
+
         }
+
     }
+
 }

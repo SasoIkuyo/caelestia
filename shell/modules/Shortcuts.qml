@@ -257,6 +257,14 @@ Scope {
             WindowFactory.create();
         }
 
+        function openUpdates(): void {
+            WindowFactory.create(null, {initialPageIdx: 6});
+        }
+
+        function openLanguageRegion(): void {
+            WindowFactory.create(null, {initialPageIdx: 12});
+        }
+
         target: "nexus"
     }
 

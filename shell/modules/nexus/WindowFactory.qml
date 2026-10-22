@@ -43,6 +43,8 @@ Singleton {
             contentItem.Config.screen: screen.name
             contentItem.Tokens.screen: screen.name
 
+            property int initialPageIdx: 0
+
             title: Es.tr(Tr.tr("Nexus — %1")).arg(PageRegistry.pages[nexus.nState.currentPageIdx].label)
 
             Nexus {
@@ -51,6 +53,7 @@ Singleton {
                 anchors.fill: parent
                 nState.screen: win.screen
                 nState.isWindow: true
+                nState.currentPageIdx: win.initialPageIdx
                 onClose: win.destroy()
             }
 

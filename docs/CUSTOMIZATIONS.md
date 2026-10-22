@@ -4,7 +4,7 @@ Resumen de lo que se aparta del upstream de Caelestia/MiDnight.
 
 ## 1. Interfaz en español
 
-- `shell/Esp.js`: diccionario de traducciones español → inglés.
+- `shell/Esp.js`: diccionario de traducciones inglés → español.
 - Los QML importan `Esp.js` y envuelven textos con `Es.tr(...)`.
 - Se mantiene la infraestructura nativa `Tr.tr()`/`qsTr()` de Caelestia.
 - El idioma no se aplica al paquete Python del sistema.
@@ -96,3 +96,8 @@ conservaron para no perder trabajo del usuario.
 - `scripts/install-schemes.sh` instala esquemas y parche Python.
 - El `QML_IMPORT_PATH` del `shell.qml` se genera con el prefijo elegido por el
   instalador.
+
+## 7. Mejoras del escritorio
+
+Audio, ubicación, catálogo nativo de español, visualizador y actualizador integrado:
+[DESKTOP-IMPROVEMENTS.md](DESKTOP-IMPROVEMENTS.md).

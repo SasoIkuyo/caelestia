@@ -25,13 +25,18 @@ El origen de los componentes se detalla en [UPSTREAM.md](docs/UPSTREAM.md).
 
 | Área | Qué incluye |
 | --- | --- |
-| Interfaz | Traducciones al español integradas en el shell QML. |
+| Interfaz | Selector de Español y catálogo nativo, además de la traducción local QML. |
+| Audio | Ocultar y recuperar dispositivos de reproducción y micrófonos. |
+| Ubicación | Buscar ciudades y guardar la ubicación para el clima. |
+| Actualizaciones | Vista previa con iconos, progreso y autenticación integrada (experimental, Arch/paru). |
 | Música | Letras sincronizadas, selector de proveedor e indicadores de sincronización. |
 | Reproductores | Selección MPRIS con prioridad manual y detección del reproductor en reproducción. |
 | Tipografía | Selección de fuentes para reloj y letras; la fuente de las letras se conserva entre reinicios. |
 | Colores | Ocho esquemas adicionales, versiones claras y oscuras y variantes Material. |
 | QuickShare | Cambios para recepción de varios archivos, mantenimiento de conexión y gestión del historial. |
 | Instalación | Plugin compilado desde fuente e instalación en el directorio del usuario. |
+
+Los cambios recientes y sus límites se describen en [DESKTOP-IMPROVEMENTS.md](docs/DESKTOP-IMPROVEMENTS.md).
 
 ### Letras de canciones
 
